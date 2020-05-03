@@ -1,0 +1,41 @@
+﻿@model WEB.Models.EditModels.EditStudentViewModel
+@{
+    ViewBag.Title = "EditStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card m-5">
+    <h3 class="card-header text-center">Змінити дані студента @Model.Name</h3>
+    <div class="card-body">
+        <form class="p-a-1" action="/Student/EditStudent" method="post">
+            <div class="form-group">
+                <input class="form-control" type="hidden" name="Id" value="@Model.Id" readonly />
+                <label for="Name"> Ім'я: </label>
+                <input class="form-control" name="Name" value="@Model.Name" />
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="GroupName"> Назва групи: </label>
+                <select id="groups" name="GroupName">
+                    @foreach (var item in ViewBag.groups)
+                    {
+                        if (@Model.GroupName == @item.Name)
+                        {
+                            <option selected>@item.Name</option>
+                        }
+                        else
+                        {
+                            <option>@item.Name</option>
+                        }
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.GroupName, "", new { @class = "text-danger" })
+            </div>
+            <div class="text-center">
+                <button type="submit">Зберегти</button>
+            </div>
+        </form>
+    </div>
+</div>
+<p>@Html.ActionLink("До списку студентів", "ShowStudent", "Student")</p>
+<p>@Html.ActionLink("На головну", "Index", "Home")</p>
+

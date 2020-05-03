@@ -1,0 +1,90 @@
+﻿@using BLL.DTO
+@model Dictionary<WEB.Models.StudentViewModel, GroupDTO>
+@{
+    ViewBag.Title = "ShowStudent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p>
+    @Html.ActionLink("Додати студента", "CreateStudent", "Student")
+</p>
+
+<table>
+    <tr>
+        <th><p>Ім'я студента</p></th>
+        <th><p>Група</p></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <p>@item.Key.Name</p>
+            </td>
+            <td>
+                <p>@item.Value.Name</p>
+            </td>
+            <td>
+                @Html.ActionLink("Інформація", "StudentDetails", "Student", new { idStudent = item.Key.Id }, null)
+            </td>
+            <td>
+                @Html.ActionLink("Видалити студента", "DeleteStudent", "Student", new { idStudent = item.Key.Id }, null)
+            </td>
+            <td>
+                @Html.ActionLink("Редагувати", "EditStudent", "Student", new { idStudent = item.Key.Id }, null)
+            </td>
+            <td>
+                @Html.ActionLink("Додати предмет студенту", "AddSubject", "Student", new { idStudent = item.Key.Id }, null)
+            </td>
+        </tr>
+    }
+</table>
+<br/>
+<br/>
+<br/>
+<form asp-controller="Student" asp-action="ShowStudent" method="get" style="display: flex; justify-content:center; border: 1px solid #CAD0D3; padding-top: 10px; align-items:center; margin-bottom: 10px;">
+    <div>
+        <p>Ім'я: <input type="text" name="searchName"></p>
+        <p>
+            Група: <select id="groups" name="searchGroup" asp-for="searchGroup" asp-items="@ViewBag.groups">
+                <option value="">Всі</option>
+                @foreach (var item in ViewBag.groups)
+                {
+                    <option>@item.Name</option>
+                }
+            </select>
+        </p>
+        <p>
+            Середній бал: <select id="studentsAvg" name="searchStudentAvg" asp-for="searchStudentAvg" asp-items="@ViewBag.students">
+                <option>Всі</option>
+                @foreach (var item in ViewBag.studentAvgs)
+                {
+                    <option>@item.ToString("0.00")</option>
+                }
+            </select>
+        </p>
+        <p>
+            Успішність: <select id="groups" name="searchProgress" asp-for="searchProgress">
+                <option>Всі</option>
+                <option>Успішні</option>
+                <option>Неуспішні</option>
+            </select>
+        </p>
+        <p>
+            Предмет: <select id="subjects" name="searchSubject" asp-for="searchSubject" asp-items="@ViewBag.subjects">
+                <option value="">Всі</option>
+                @foreach (var item in ViewBag.subjects)
+                {
+                    <option>@item.Name</option>
+                }
+            </select>
+        </p>
+        <input type="submit" value="Пошук" />
+    </div>
+</form>
+<p align="center">@ViewBag.message</p>
+<p> @Html.ActionLink("На головну", "Index", "Home")</p>
+<p>@Html.ActionLink("До списку студентів", "ShowStudent", "Student")</p>
+

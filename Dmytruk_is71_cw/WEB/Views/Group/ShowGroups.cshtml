@@ -1,0 +1,32 @@
+﻿@model IEnumerable<WEB.Models.GroupViewModel>
+@{
+    ViewBag.Title = "ShowGroups";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<p>@Html.ActionLink("Додати групу", "CreateGroup", "Group")</p>
+<table class="table">
+    <tr>
+        <th><p>Назва групи</p></th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <p>@item.Name</p>
+            </td>
+            <td>
+                @Html.ActionLink("Список групи", "GroupDetails", "Group", new { idGroup = item.Id }, null)
+            </td>
+            <td>
+                @Html.ActionLink("Видалити групу", "DeleteGroup", "Group", new { idGroup = item.Id }, null)
+            </td>
+            <td>
+                @Html.ActionLink("Редагувати", "EditGroup", "Group", new { idGroup = item.Id }, null)
+            </td>
+        </tr>
+    }
+</table>
+<p>@Html.ActionLink("На головну", "Index", "Home")</p>

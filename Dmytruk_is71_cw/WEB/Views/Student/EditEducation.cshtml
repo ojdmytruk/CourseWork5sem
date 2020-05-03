@@ -1,0 +1,28 @@
+﻿@model WEB.Models.EducationProcessViewModel
+@{
+    ViewBag.Title = "EditEducation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card m-5">
+    <h3 class="card-header text-center">Змінити оцінку за предмет</h3>
+    <div class="card-body">
+        <form class="p-a-1" action="/Student/EditEducation" method="post">
+            <div class="form-group">
+                <input class="form-control" type="hidden" name="Id" value="@Model.Id" readonly />
+                <input class="form-control" type="hidden" name="IdStudent" value="@Model.IdStudent" readonly />
+                <label for="SubjectName"> Предмет: </label>
+                <input class="form-control" name="SubjectName" value="@Model.SubjectName" readonly />
+            </div>
+            <div class="form-group">
+                <label for="SubjectResult"> Оцінка: </label>
+                <input class="form-control" style="width:75px" name="SubjectResult" type="number" max="100" min="1" value="@Model.SubjectResult" />
+            </div>
+            <div class="text-center">
+                <button type="submit">Зберегти</button>
+            </div>
+        </form>
+    </div>
+</div>
+<p>@Html.ActionLink("До списку студентів", "ShowStudent", "Student")</p>
+<p>@Html.ActionLink("На головну", "Index", "Home")</p>
+

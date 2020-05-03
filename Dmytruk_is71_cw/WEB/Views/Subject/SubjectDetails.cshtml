@@ -1,0 +1,29 @@
+﻿@model Dictionary<string, int>
+@{
+    ViewBag.Title = "SubjectDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4><b>Предмет:</b> @ViewBag.subjectName</h4>
+<h4><b>Середній бал по предмету:</b>  @ViewBag.subjectAvg</h4>
+<table class="table">
+    <tr>
+        <th><p>Ім'я студента</p></th>
+        <th><p>Оцінка</p></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <p>@item.Key</p>
+            </td>
+            <td>
+                <p>@item.Value</p>
+            </td>
+        </tr>
+    }
+</table>
+<p>@Html.ActionLink("До списку предметів", "ShowSubject", "Subject")</p>
+<p>@Html.ActionLink("На головну", "Index", "Home")</p>
+
+s

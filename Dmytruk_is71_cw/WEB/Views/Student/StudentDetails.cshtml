@@ -1,0 +1,37 @@
+﻿@model IEnumerable<WEB.Models.EducationProcessViewModel>
+@{
+    ViewBag.Title = "StudentDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h4><b>Ім'я студента: </b>@ViewBag.studentName</h4>
+<h4><b>Група: </b>@ViewBag.studentGroup</h4>
+<h4><b>Середній бал: </b>@ViewBag.studentAvg</h4>
+<p align="right">@Html.ActionLink("Додати новий предмет студенту", "AddSubject", "Student", new { idStudent = ViewBag.studentId }, null)</p>
+<table class="table">
+    <tr>
+        <th><p>Предмет</p></th>
+        <th><p>Оцінка</p></th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <p>@item.SubjectName</p>
+            </td>
+            <td>
+                <p>@item.SubjectResult</p>
+            </td>
+            <td>
+                @Html.ActionLink("Видалити запис", "DeleteEducation", "Student", new { idEducation = @item.Id }, null)
+            </td>
+            <td>
+                @Html.ActionLink("Редагувати запис", "EditEducation", "Student", new { idEducation = @item.Id }, null)
+            </td>
+        </tr>
+    }
+</table>
+<p>@Html.ActionLink("До списку студентів", "ShowStudent", "Student")</p>
+<p>@Html.ActionLink("На головну", "Index", "Home")</p>
+

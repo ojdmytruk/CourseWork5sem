@@ -1,0 +1,23 @@
+﻿@model WEB.Models.GroupViewModel
+@{
+    ViewBag.Title = "CreateGroup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card m-5">
+    <h3 class="card-header text-center">Додати нову групу</h3>
+    <div class="card-body">
+        <form class="p-a-1" action="/Group/CreateGroup" method="post">
+            <div class="form-group">
+                <label for="Name"> Назва: </label>
+                <input class="form-control" name="Name" />
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="text-center">
+                <button type="submit">Зберегти</button>
+            </div>
+        </form>
+    </div>
+</div>
+<p>@Html.ActionLink("До списку груп", "ShowGroups", "Group")</p>
+<p>@Html.ActionLink("На головну", "Index", "Home")</p>
+

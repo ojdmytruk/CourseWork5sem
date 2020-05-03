@@ -1,0 +1,25 @@
+﻿@model IEnumerable<WEB.Models.StudentViewModel>
+@{
+    ViewBag.Title = "GroupDetails";
+}
+<h3>Список групи @ViewBag.groupName:</h3>
+<table class="table">
+    <tr>
+        <th><p>Ім'я студента</p></th>
+        <th><p>Середній бал</p></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <p>@item.Name</p>
+            </td>
+            <td>
+                <p>@item.StudentAvg.ToString("0.00")</p>
+            </td>
+        </tr>
+    }
+</table>
+<p>@Html.ActionLink("Список груп", "ShowGroups", "Group")</p>
+<p>@Html.ActionLink("На головну", "Index", "Home")</p>
+

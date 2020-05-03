@@ -1,0 +1,24 @@
+﻿@model WEB.Models.SubjectViewModel
+@{
+    ViewBag.Title = "CreateSubject";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card m-5">
+    <h3 class="card-header text-center">Додати новий предмет</h3>
+    <div class="card-body">
+        <form class="p-a-1" action="/Subject/CreateSubject" method="post">
+            <div class="form-group">
+                <label for="Name"> Назва: </label>
+                <input class="form-control" name="Name" value="@Model.Name" />
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="text-center">
+                <button type="submit">Зберегти</button>
+            </div>
+        </form>
+    </div>
+</div>
+<p>@Html.ActionLink("До списку предметів", "ShowSubject", "Subject")</p>
+<p>@Html.ActionLink("На головну", "Index", "Home")</p>
+
